@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
+import alertContext from '../../context/alert/alertContext';
+import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
-const Search = ({ showClear, clearUsers, searchUsers, setAlert }) => {
+const Search = () => {
+  const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
   const [text, setText] = useState(''); //would have state = {text: ''} in a class based component
 
   const onSubmit = (e) => {
     e.preventDefault(); //important to have so it doesn't reset
     if (text === '') {
-      setAlert('Please enter something to search.', 'light');
+      alertContext.setAlert('Please enter something to search.', 'light');
     } else {
-      searchUsers(text);
+      githubContext.searchUsers(text);
       setText('');
     }
   };
@@ -32,20 +36,16 @@ const Search = ({ showClear, clearUsers, searchUsers, setAlert }) => {
           className='btn btn-dark btn-block'
         />
       </form>
-      {showClear && ( //conditionally rendering clear button
-        <button className='btn btn-light btn-block' onClick={clearUsers}>
+      {githubContext.users.length > 0 && ( //conditionally rendering clear button
+        <button
+          className='btn btn-light btn-block'
+          onClick={githubContext.clearUsers}
+        >
           Clear
         </button>
       )}
     </div>
   );
-};
-
-Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
-  setAlerts: PropTypes.func.isRequired,
 };
 
 export default Search;
