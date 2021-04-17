@@ -1,3 +1,13 @@
+# Github Finder
+This is an application that interacts with the Github API using React and Context to find users. You can search a name and an organized list of users will appear. You can click on a user and see all of their Github profile information, with links to their repositories. This project was done as a part of the Udemy course: "React Front to Back" by Brad Traversy.
+
+
+Link: https://hborska-github-finder.netlify.app/
+
+
+### Below if the default information for Create React App
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
